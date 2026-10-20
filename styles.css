@@ -162,6 +162,7 @@ a { color: inherit; }
 .container { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-padding); }
 
 .page-header {
+    position: relative;
     padding: clamp(3rem, 8vw, 5.5rem) 0 clamp(1.5rem, 4vw, 2.5rem);
     border-bottom: 1px solid rgba(62, 39, 35, 0.1);
     margin-bottom: clamp(2rem, 5vw, 3.25rem);
@@ -557,6 +558,52 @@ main { padding-bottom: clamp(3rem, 8vw, 5rem); }
 }
 
 /* ============================================
+   TITLE SPRIG
+   The page's opening moment: a stem draws itself beside the title,
+   then its leaves and blooms settle in.
+   ============================================ */
+.title-sprig {
+    position: absolute;
+    right: 0;
+    bottom: clamp(1rem, 3vw, 1.75rem);
+    width: clamp(70px, 11vw, 120px);
+    height: auto;
+    overflow: visible;
+    color: var(--accent-sage);
+    pointer-events: none;
+}
+.title-sprig-stem {
+    fill: none;
+    stroke: var(--accent-sage);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+}
+.title-sprig-branch { stroke-width: 1.2; }
+.title-sprig-leaf,
+.title-sprig-bloom {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+.page-header.is-drawn .title-sprig-stem {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1.4s cubic-bezier(0.45, 0, 0.25, 1) 0.15s;
+}
+.page-header.is-drawn .title-sprig-branch { transition-delay: 0.9s; transition-duration: 0.7s; }
+.page-header.is-drawn .title-sprig-leaf { opacity: 1; }
+.page-header.is-drawn .title-sprig-leaf:nth-of-type(1) { transition-delay: 0.5s; }
+.page-header.is-drawn .title-sprig-leaf:nth-of-type(2) { transition-delay: 0.65s; }
+.page-header.is-drawn .title-sprig-leaf:nth-of-type(3) { transition-delay: 0.95s; }
+.page-header.is-drawn .title-sprig-leaf:nth-of-type(4) { transition-delay: 1.1s; }
+.page-header.is-drawn .title-sprig-leaf:nth-of-type(5) { transition-delay: 1.3s; }
+.page-header.is-drawn .title-sprig-bloom { opacity: 1; transition-delay: 1.5s; }
+
+/* Keep the header copy clear of the sprig. */
+.page-header > h1,
+.page-header > .lede { max-width: calc(100% - clamp(80px, 13vw, 140px)); }
+
+/* ============================================
    HOME HERO
    ============================================ */
 .page-header-home {
@@ -598,6 +645,31 @@ main { padding-bottom: clamp(3rem, 8vw, 5rem); }
     .polaroid { width: min(220px, 60vw); justify-self: center; grid-row: 1; }
     .page-header-home .title-sprig { display: none; }
 }
+
+/* ============================================
+   NAV DETAILS
+   The current page gets a hand-drawn squiggle instead of a ruler line.
+   ============================================ */
+.nav-links a[aria-current="page"]::after,
+.nav-drop.has-current > .nav-drop-btn {
+    color: var(--text-primary);
+}
+.nav-links > li > a[aria-current="page"]::after,
+.nav-drop.has-current > .nav-drop-btn::before {
+    content: '';
+    position: absolute;
+    left: -2px;
+    right: -2px;
+    bottom: -7px;
+    width: auto;
+    height: 6px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 6' preserveAspectRatio='none'%3E%3Cpath d='M1 4C6 1 10 5 15 3S24 1 29 3S36 5 39 2' fill='none' stroke='%23E8A6B8' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+.nav-drop.has-current > .nav-drop-btn { font-weight: 700; }
+.nav-drop-menu {
+    background-image: var(--paper);
+}
+.nav-drop-menu a[aria-current="page"] { color: var(--text-primary); box-shadow: inset 3px 0 0 var(--accent-pink-dark); }
 
 /* ============================================
    SMALL THINGS

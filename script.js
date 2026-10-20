@@ -118,6 +118,32 @@ document.addEventListener('DOMContentLoaded', () => {
         el.insertAdjacentHTML('afterbegin', tape);
     });
 
+    // A stem that draws itself beside each page title: the one moment of
+    // motion a page opens with.
+    const header = document.querySelector('.page-header');
+    if (header) {
+        header.insertAdjacentHTML('beforeend', `
+            <svg class="title-sprig" viewBox="0 0 120 170" aria-hidden="true" focusable="false">
+                <path class="title-sprig-stem" pathLength="1"
+                      d="M18 166C26 138 22 116 38 96C52 78 50 58 66 42C80 28 92 20 104 10"/>
+                <path class="title-sprig-stem title-sprig-branch" pathLength="1"
+                      d="M40 94C56 90 70 92 82 100"/>
+                <use class="title-sprig-leaf" href="#hbLeaf" transform="translate(26 132) rotate(-120) scale(1.7)"/>
+                <use class="title-sprig-leaf" href="#hbLeaf" transform="translate(30 116) rotate(-20) scale(1.5)"/>
+                <use class="title-sprig-leaf" href="#hbLeaf" transform="translate(50 70) rotate(-140) scale(1.6)"/>
+                <use class="title-sprig-leaf" href="#hbLeaf" transform="translate(58 56) rotate(-30) scale(1.4)"/>
+                <use class="title-sprig-leaf" href="#hbLeaf" transform="translate(82 30) rotate(-150) scale(1.3)"/>
+                <use class="title-sprig-bloom" href="#hbBloom" transform="translate(104 10) scale(1.9)"/>
+                <use class="title-sprig-bloom" href="#hbBloom" transform="translate(82 100) scale(1.5)"/>
+            </svg>`);
+        requestAnimationFrame(() => header.classList.add('is-drawn'));
+    }
+
+    // The dropdown that holds the current page reads as current too.
+    document.querySelectorAll('.nav-drop').forEach((drop) => {
+        if (drop.querySelector('[aria-current="page"]')) drop.classList.add('has-current');
+    });
+
     /* --- Reveal sections as they scroll into view --- */
     const revealables = document.querySelectorAll('.reveal');
     if (!revealables.length) return;
