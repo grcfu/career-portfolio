@@ -286,6 +286,10 @@ main { padding-bottom: clamp(3rem, 8vw, 5rem); }
 .swatch-row { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
 .swatch { border: 1px solid rgba(62, 39, 35, 0.1); background-color: var(--white); }
 .swatch-chip { height: 90px; }
+.swatch-cream { background-color: #EEEBE7; }
+.swatch-blush { background-color: #F4C9D6; }
+.swatch-espresso { background-color: #3E2723; }
+.swatch-sage { background-color: #A8B89A; }
 .swatch-meta { padding: 0.7rem 0.85rem; font-size: 0.75rem; }
 .swatch-meta strong { display: block; font-size: 0.85rem; }
 .swatch-meta code { color: var(--text-muted); font-size: 0.72rem; }
@@ -368,10 +372,12 @@ main { padding-bottom: clamp(3rem, 8vw, 5rem); }
 .ai-disclosure a { color: var(--text-primary); font-weight: 600; }
 .ai-disclosure dl { margin-top: 0.6rem; }
 .ai-disclosure dt { font-weight: 700; font-size: 0.74rem; margin-top: 0.6rem; }
+.ai-link-row { margin-top: 0.9rem; }
 
 /* ============================================
    POINT TABLE
    ============================================ */
+.lede-tight { margin-bottom: 1.2rem; }
 .point-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; background-color: var(--white); }
 .point-table th, .point-table td {
     text-align: left; padding: 0.65rem 0.85rem; border-bottom: 1px solid rgba(62, 39, 35, 0.1);
@@ -406,6 +412,13 @@ main { padding-bottom: clamp(3rem, 8vw, 5rem); }
     font-size: 0.74rem; color: rgba(238, 235, 231, 0.5);
     display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
 }
+
+/* ============================================
+   SMALL THINGS
+   ============================================ */
+.subhead { margin-top: 1.4rem; }
+.embed-fallback { padding: 2rem; }
+.source-list { margin-left: 1.2rem; }
 
 /* ============================================
    REVEAL ANIMATION
