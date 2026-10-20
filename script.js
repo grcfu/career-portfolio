@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Taped-down prints: paint chips and the home-page polaroid.
-    document.querySelectorAll('.swatch').forEach((el) => {
+    document.querySelectorAll('.swatch, .polaroid').forEach((el) => {
         el.insertAdjacentHTML('afterbegin', tape);
     });
 

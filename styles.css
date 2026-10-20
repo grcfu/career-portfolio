@@ -557,6 +557,49 @@ main { padding-bottom: clamp(3rem, 8vw, 5rem); }
 }
 
 /* ============================================
+   HOME HERO
+   ============================================ */
+.page-header-home {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) clamp(170px, 24vw, 250px);
+    gap: clamp(1.5rem, 5vw, 4rem);
+    align-items: center;
+}
+/* On the home page the stem grows up from behind the polaroid's corner. */
+.page-header-home .title-sprig { right: -2.25rem; bottom: 1rem; width: clamp(64px, 8vw, 92px); z-index: 0; }
+.page-header-home .home-intro { position: relative; z-index: 1; }
+
+.polaroid {
+    --hue: var(--accent-pink);
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    padding: 0.65rem 0.65rem 2.6rem;
+    background-color: var(--white);
+    box-shadow: 0 1px 2px rgba(62, 39, 35, 0.14), 6px 12px 24px rgba(62, 39, 35, 0.16);
+    transform: rotate(2.5deg);
+    transition: transform 0.5s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+.polaroid:hover { transform: rotate(0deg) translateY(-4px); }
+.polaroid img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: 50% 20%;
+    outline: 1px solid rgba(62, 39, 35, 0.06);
+    outline-offset: -1px;
+}
+.polaroid .tape { top: -0.7rem; width: 5rem; transform: translateX(-50%) rotate(3deg); }
+
+@media (max-width: 720px) {
+    .page-header-home { grid-template-columns: 1fr; }
+    .polaroid { width: min(220px, 60vw); justify-self: center; grid-row: 1; }
+    .page-header-home .title-sprig { display: none; }
+}
+
+/* ============================================
    SMALL THINGS
    ============================================ */
 .subhead { margin-top: 1.4rem; }
