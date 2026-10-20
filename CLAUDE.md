@@ -1,21 +1,18 @@
-# Career Portfolio — MGT Digital Career Portfolio
+# Career Portfolio · MGT Digital Career Portfolio
 
 ## Context
 Second portfolio site for Grace Fu, separate from the technical portfolio at
 grcfu.github.io. Audience is a management professor / TA, not a SWE recruiter.
 Deployed at grcfu.github.io/career-portfolio.
 
-## HARD RULE — AI use policy (Level 2, ideation only)
-The assignment forbids AI from writing ANY portfolio content: no essays,
-stories, statements, reflections, project descriptions, brand statements, or
-podcast scripts — not even a "first draft to be revised." Grace writes every
-word herself.
+## Writing policy
+Updated Oct 2026: Grace's professor approved drafting portfolio content with
+Claude in this chat, with no per-piece disclosure required. Claude may write
+page copy, but only from what Grace tells it about her own experiences, in
+her plain first-person voice. No em dashes, no stock AI phrasing.
 
-Claude's role on this repo is code only: HTML/CSS/JS, layout, embeds, deploy.
-Do not draft page copy. Placeholder text in `.placeholder` spans is scaffolding
-describing what SHE must write, never a draft to be polished.
-
-Statistics and citations must never come from AI — they get fabricated.
+Statistics and citations must never be invented. Pull them from real,
+checkable sources and link them.
 
 ## Structure
 - 11 static pages, one per graded checklist item, plus `index.html` as a hub
