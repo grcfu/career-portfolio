@@ -1,5 +1,5 @@
 /* ============================================
-   GRACE FU — CAREER PORTFOLIO (MGT)
+   GRACE FU · CAREER PORTFOLIO (MGT)
    Editorial · Cream & Blush Pink
    Brand carried over from grcfu.github.io
    ============================================ */
@@ -740,6 +740,81 @@ main { padding-bottom: clamp(3rem, 8vw, 5rem); }
 .embed-fallback { padding: 2rem; }
 .source-list { margin-left: 1.2rem; }
 
+/* Scaffolding notes read as pinned sticky notes, so they're obviously
+   not part of the finished page. */
+.todo { position: relative; box-shadow: 3px 4px 0 rgba(232, 166, 184, 0.18); }
+.todo::before {
+    content: '';
+    position: absolute;
+    top: -0.5rem;
+    left: 1.4rem;
+    width: 3.2rem;
+    height: 0.95rem;
+    transform: rotate(-4deg);
+    background-color: rgba(244, 201, 214, 0.85);
+    border-left: 1px dashed rgba(255, 255, 255, 0.7);
+    border-right: 1px dashed rgba(255, 255, 255, 0.7);
+}
+
+.doc-embed, .video-embed {
+    box-shadow: 0 1px 2px rgba(62, 39, 35, 0.1), 4px 8px 18px rgba(62, 39, 35, 0.1);
+    border: 0.45rem solid var(--white);
+}
+
+.btn { border-radius: 0; transition: background-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast); }
+.btn:hover { transform: translateY(-2px); box-shadow: 3px 4px 0 var(--accent-pink); }
+.btn.secondary:hover { box-shadow: 3px 4px 0 rgba(62, 39, 35, 0.15); }
+
+a:focus-visible, button:focus-visible, .hub-card:focus-visible {
+    outline: 2px solid var(--accent-pink-dark);
+    outline-offset: 3px;
+}
+
+/* Back to top, the same round button as the technical portfolio. */
+.back-to-top {
+    position: fixed;
+    right: 2rem;
+    bottom: 2rem;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+    background-color: var(--white);
+    border: 1px solid rgba(62, 39, 35, 0.12);
+    border-radius: 50%;
+    box-shadow: var(--shadow-md);
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all var(--transition-medium);
+    z-index: 100;
+}
+.back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top:hover { background-color: var(--accent-pink); transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+
+.ink-dot {
+    position: fixed;
+    pointer-events: none;
+    border-radius: 50%;
+    background-color: var(--accent-pink-dark);
+    z-index: 9997;
+    opacity: 0.55;
+    transition: opacity 0.6s ease;
+}
+.ink-dot.fade { opacity: 0; }
+
+@media (max-width: 640px) {
+    .plate-sprig-tl { width: 2.3rem; height: 2.3rem; }
+    .plate-sprig-tr, .plate-sprig-br { width: 1.7rem; height: 1.7rem; }
+    .story { padding: 1.8rem 1.25rem 1.3rem 2.2rem; }
+    .back-to-top { right: 1.25rem; bottom: 1.25rem; }
+    .page-header > h1, .page-header > .lede { max-width: none; }
+    .title-sprig { width: 56px; bottom: auto; top: clamp(2rem, 8vw, 3rem); }
+}
+
 /* ============================================
    REVEAL ANIMATION
    ============================================ */
@@ -749,6 +824,12 @@ main { padding-bottom: clamp(3rem, 8vw, 5rem); }
 @media (prefers-reduced-motion: reduce) {
     .reveal { opacity: 1; transform: none; transition: none; }
     html { scroll-behavior: auto; }
+    .title-sprig-stem { stroke-dashoffset: 0; }
+    .title-sprig-leaf, .title-sprig-bloom { opacity: 1; }
+    .page-header.is-drawn .title-sprig-stem,
+    .page-header.is-drawn .title-sprig-leaf,
+    .page-header.is-drawn .title-sprig-bloom { transition: none; }
+    .plate, .plate-sprig, .swatch, .polaroid, .btn { transition: none; }
 }
 
 /* ============================================

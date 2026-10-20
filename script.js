@@ -1,5 +1,5 @@
 /* ============================================
-   GRACE FU — CAREER PORTFOLIO
+   GRACE FU · CAREER PORTFOLIO
    Navigation, dropdowns, scroll reveal.
    No inline handlers anywhere in the HTML.
    ============================================ */
@@ -143,6 +143,39 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.nav-drop').forEach((drop) => {
         if (drop.querySelector('[aria-current="page"]')) drop.classList.add('has-current');
     });
+
+    /* --- Back to top, mirroring the technical portfolio --- */
+    const backToTop = document.createElement('button');
+    backToTop.className = 'back-to-top';
+    backToTop.type = 'button';
+    backToTop.setAttribute('aria-label', 'Back to top');
+    backToTop.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 15l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    document.body.append(backToTop);
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: reduceMotionPref ? 'auto' : 'smooth' });
+    });
+    const syncBackToTop = () => backToTop.classList.toggle('visible', window.scrollY > 500);
+    window.addEventListener('scroll', syncBackToTop, { passive: true });
+    syncBackToTop();
+
+    /* --- Ink-trail cursor (hover-capable devices only) --- */
+    if (window.matchMedia('(hover: hover)').matches && !reduceMotionPref) {
+        let lastInk = 0;
+        document.addEventListener('mousemove', (e) => {
+            const now = performance.now();
+            if (now - lastInk < 30) return;
+            lastInk = now;
+            const dot = document.createElement('span');
+            dot.className = 'ink-dot';
+            const size = 4 + Math.random() * 6;
+            dot.style.width = dot.style.height = size + 'px';
+            dot.style.left = (e.clientX - size / 2) + 'px';
+            dot.style.top = (e.clientY - size / 2) + 'px';
+            document.body.appendChild(dot);
+            requestAnimationFrame(() => dot.classList.add('fade'));
+            setTimeout(() => dot.remove(), 700);
+        }, { passive: true });
+    }
 
     /* --- Reveal sections as they scroll into view --- */
     const revealables = document.querySelectorAll('.reveal');
