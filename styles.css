@@ -12,6 +12,8 @@
     --accent-pink: #F4C9D6;
     --accent-pink-dark: #E8A6B8;
     --accent-sage: #A8B89A;
+    --sage-ink: #7E8C71;
+    --paper: linear-gradient(158deg, #FCFAF7 0%, #F6F2EA 100%);
     --text-primary: #3E2723;
     --text-secondary: #6D5D53;
     --text-muted: #9C8E84;
@@ -223,36 +225,105 @@ main { padding-bottom: clamp(3rem, 8vw, 5rem); }
 }
 
 /* ============================================
-   CARDS / HUB GRID
+   PRESSED PLATES
+   The shared frame for hub cards, stories and SWOT quadrants: paper
+   gradient, inset dashed mount rule, washi tape, four corner sprigs from
+   one rotated symbol, and a hand-placed tilt that straightens on hover.
+   --hue tints the tape, rule and sprigs per category.
+   ============================================ */
+.hb-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+.plate {
+    --hue: var(--accent-sage);
+    --rot: 0deg;
+    position: relative;
+    background-image: var(--paper);
+    border: 1px solid color-mix(in srgb, var(--hue) 58%, transparent);
+    box-shadow: 5px 6px 0 rgba(62, 39, 35, 0.06), var(--shadow-sm);
+    transform: rotate(var(--rot));
+    transition: transform 0.4s cubic-bezier(0.34, 1.4, 0.64, 1),
+                box-shadow 0.4s cubic-bezier(0.34, 1.4, 0.64, 1),
+                border-color var(--transition-fast);
+}
+
+.plate::after {
+    content: '';
+    position: absolute;
+    inset: 7px;
+    border: 1px dashed color-mix(in srgb, var(--hue) 55%, transparent);
+    pointer-events: none;
+}
+
+.tape {
+    position: absolute;
+    top: -0.55rem;
+    left: 50%;
+    width: 4.5rem;
+    height: 1.1rem;
+    transform: translateX(-50%) rotate(-1.6deg);
+    background-color: color-mix(in srgb, var(--hue, var(--accent-pink)) 62%, var(--white));
+    border-left: 1px dashed rgba(255, 255, 255, 0.6);
+    border-right: 1px dashed rgba(255, 255, 255, 0.6);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.plate-sprig {
+    --sr: 0deg;
+    position: absolute;
+    width: 2.9rem;
+    height: 2.9rem;
+    color: var(--hue);
+    overflow: visible;
+    pointer-events: none;
+    transform: rotate(var(--sr));
+    transition: transform 0.45s cubic-bezier(0.34, 1.4, 0.64, 1);
+    z-index: 1;
+}
+.plate-sprig-tl { top: -0.4rem; left: -0.4rem; }
+.plate-sprig-tr { --sr: 90deg; width: 2rem; height: 2rem; top: -0.25rem; right: -0.25rem; }
+.plate-sprig-br { --sr: 180deg; width: 2.4rem; height: 2.4rem; right: -0.3rem; bottom: -0.3rem; }
+.plate-sprig-bl { --sr: 270deg; width: 1.4rem; height: 1.4rem; bottom: -0.35rem; left: -0.35rem; }
+
+/* ============================================
+   HUB GRID
    ============================================ */
 .hub-grid {
-    display: grid; gap: 1.1rem;
+    display: grid; gap: 1.6rem 1.4rem;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    padding-top: 0.75rem;
 }
 
 .hub-card {
+    --hue: var(--accent-pink-dark);
     display: block; text-decoration: none;
-    background-color: var(--white);
-    border: 1px solid rgba(62, 39, 35, 0.1);
-    padding: 1.35rem 1.4rem;
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-    position: relative;
+    padding: 1.75rem 1.6rem 1.45rem;
 }
-.hub-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
-.hub-card h3 { margin-bottom: 0.3rem; }
+.hub-card.is-sage { --hue: var(--accent-sage); }
+.hub-card:nth-child(3n + 1) { --rot: -0.7deg; }
+.hub-card:nth-child(3n + 2) { --rot: 0.5deg; }
+.hub-card:nth-child(3n + 3) { --rot: -0.35deg; }
+
+.hub-card:hover,
+.hub-card:focus-visible {
+    transform: translateY(-6px) rotate(0deg);
+    box-shadow: 8px 10px 0 rgba(62, 39, 35, 0.09), var(--shadow-md);
+    border-color: color-mix(in srgb, var(--hue) 90%, transparent);
+}
+.hub-card:hover .plate-sprig,
+.hub-card:focus-visible .plate-sprig { transform: rotate(var(--sr)) scale(1.12); }
+
+.hub-card h3 { font-style: italic; font-size: 1.3rem; margin: 0.35rem 0 0.35rem; }
 .hub-card p { font-size: 0.82rem; color: var(--text-secondary); }
 .hub-card .pts {
-    position: absolute; top: 1.1rem; right: 1.2rem;
-    font-size: 0.62rem; font-weight: 700; letter-spacing: 0.08em;
-    color: var(--accent-pink-dark);
+    position: absolute; top: 1.15rem; right: 1.35rem;
+    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em;
+    color: var(--text-primary);
+    background-color: var(--white);
+    border: 1px dashed rgba(62, 39, 35, 0.4);
+    padding: 0.22rem 0.5rem;
+    z-index: 2;
 }
-
-/* Card top edge tint */
-.hub-card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0;
-    height: 3px; background-color: var(--accent-pink);
-}
-.hub-card.is-sage::before { background-color: var(--accent-sage); }
 
 /* ============================================
    SWOT 2x2 GRID
