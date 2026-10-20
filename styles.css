@@ -327,27 +327,51 @@ main { padding-bottom: clamp(3rem, 8vw, 5rem); }
 
 /* ============================================
    SWOT 2x2 GRID
+   Four separate plates rather than one ruled box, each with its
+   initial pressed faintly into the paper behind the phrases.
    ============================================ */
 .swot-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
-    background-color: rgba(62, 39, 35, 0.14);
-    border: 1px solid rgba(62, 39, 35, 0.14);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem 1.4rem;
+    padding-top: 0.75rem;
 }
-.swot-cell { background-color: var(--white); padding: 1.5rem 1.4rem; min-height: 175px; }
+.swot-cell { padding: 1.9rem 1.7rem 1.6rem; min-height: 190px; overflow: hidden; }
+.swot-cell.s, .swot-cell.o { --hue: var(--accent-sage); }
+.swot-cell.w, .swot-cell.t { --hue: var(--accent-pink-dark); }
+.swot-cell.s { --rot: -0.5deg; }
+.swot-cell.w { --rot: 0.4deg; }
+.swot-cell.o { --rot: 0.3deg; }
+.swot-cell.t { --rot: -0.45deg; }
+
+.swot-cell::before {
+    position: absolute;
+    right: 1.1rem;
+    bottom: -1.6rem;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 8rem;
+    line-height: 1;
+    color: color-mix(in srgb, var(--hue) 22%, transparent);
+    pointer-events: none;
+}
+.swot-cell.s::before { content: 'S'; }
+.swot-cell.w::before { content: 'W'; }
+.swot-cell.o::before { content: 'O'; }
+.swot-cell.t::before { content: 'T'; }
+
 .swot-cell h3 {
+    position: relative;
+    padding-left: 1.4rem;
     font-family: var(--font-body); font-size: 0.66rem; letter-spacing: 0.2em;
-    text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 0.9rem;
+    text-transform: uppercase; color: var(--sage-ink); font-weight: 700; margin-bottom: 0.9rem;
 }
-.swot-cell ul { list-style: none; }
+.swot-cell.w h3, .swot-cell.t h3 { color: #B8798C; }
+.swot-cell ul { position: relative; list-style: none; }
 .swot-cell li {
-    font-family: var(--font-display); font-size: 1.05rem;
-    padding: 0.32rem 0; border-bottom: 1px solid var(--bg-secondary);
+    font-family: var(--font-display); font-size: 1.1rem; font-style: italic;
+    padding: 0.32rem 0; border-bottom: 1px dashed rgba(62, 39, 35, 0.14);
 }
 .swot-cell li:last-child { border-bottom: none; }
-.swot-cell.s { box-shadow: inset 4px 0 0 var(--accent-sage); }
-.swot-cell.w { box-shadow: inset 4px 0 0 var(--accent-pink-dark); }
-.swot-cell.o { box-shadow: inset 4px 0 0 var(--accent-sage); }
-.swot-cell.t { box-shadow: inset 4px 0 0 var(--accent-pink-dark); }
 
 @media (max-width: 640px) { .swot-grid { grid-template-columns: 1fr; } }
 
