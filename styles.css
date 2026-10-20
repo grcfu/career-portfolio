@@ -403,25 +403,37 @@ main { padding-bottom: clamp(3rem, 8vw, 5rem); }
 
 /* ============================================
    STAR STORIES
+   Each story is a ruled index card: faint lines, a blush margin rule, and
+   the plate frame around it. These are the cards you'd study before an
+   interview.
    ============================================ */
+.todo + .story { margin-top: 2.2rem; }
 .story {
-    background-color: var(--white); border: 1px solid rgba(62, 39, 35, 0.1);
-    padding: 1.6rem 1.7rem; margin-bottom: 1.2rem;
+    --hue: var(--accent-pink-dark);
+    padding: 2rem 1.9rem 1.5rem 2.6rem;
+    margin-bottom: 1.8rem;
+    background-image:
+        linear-gradient(to right, transparent 1.55rem, rgba(232, 166, 184, 0.55) 1.55rem, rgba(232, 166, 184, 0.55) calc(1.55rem + 1px), transparent calc(1.55rem + 1px)),
+        repeating-linear-gradient(to bottom, transparent 0, transparent calc(1.9rem - 1px), rgba(148, 167, 176, 0.18) calc(1.9rem - 1px), rgba(148, 167, 176, 0.18) 1.9rem),
+        var(--paper);
 }
+.story:nth-of-type(odd) { --rot: -0.4deg; }
+.story:nth-of-type(even) { --rot: 0.35deg; }
 .story-prompt {
-    font-family: var(--font-display); font-style: italic; font-size: 1.15rem;
+    position: relative;
+    font-family: var(--font-display); font-style: italic; font-size: 1.2rem;
     padding-bottom: 0.75rem; margin-bottom: 1rem;
-    border-bottom: 1px solid var(--bg-secondary);
+    border-bottom: 1px solid rgba(232, 166, 184, 0.5);
 }
-.star-line { display: grid; grid-template-columns: 90px 1fr; gap: 1rem; margin-bottom: 0.75rem; }
+.star-line { position: relative; display: grid; grid-template-columns: 90px 1fr; gap: 1rem; margin-bottom: 0.75rem; }
 .star-line dt {
     font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
-    font-weight: 700; color: var(--accent-pink-dark); padding-top: 0.25rem;
+    font-weight: 700; color: #B8798C; padding-top: 0.25rem;
 }
 .star-line dd { font-size: 0.92rem; }
 @media (max-width: 560px) { .star-line { grid-template-columns: 1fr; gap: 0.2rem; } }
 
-.wordcount { font-size: 0.7rem; color: var(--text-muted); text-align: right; margin-top: 0.8rem; }
+.wordcount { position: relative; font-size: 0.7rem; color: var(--text-muted); text-align: right; margin-top: 0.8rem; }
 
 /* ============================================
    EMBEDS / DOCS

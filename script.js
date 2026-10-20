@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const tape = '<span class="tape" aria-hidden="true"></span>';
 
     // Plates: hub cards, story cards and SWOT quadrants get the full frame.
-    document.querySelectorAll('.hub-card, .swot-cell').forEach((el) => {
+    document.querySelectorAll('.hub-card, .story, .swot-cell').forEach((el) => {
         el.classList.add('plate');
         el.insertAdjacentHTML('afterbegin', tape + ['tl', 'tr', 'br', 'bl'].map(sprig).join(''));
     });
