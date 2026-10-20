@@ -377,29 +377,65 @@ main { padding-bottom: clamp(3rem, 8vw, 5rem); }
 
 /* ============================================
    BRAND STYLE GUIDE
+   Swatches as taped paint chips; type specimens with a big pressed glyph.
    ============================================ */
-.swatch-row { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
-.swatch { border: 1px solid rgba(62, 39, 35, 0.1); background-color: var(--white); }
-.swatch-chip { height: 90px; }
+.swatch-row {
+    display: grid; gap: 1.6rem 1.3rem;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    padding-top: 0.75rem;
+}
+.swatch {
+    --hue: var(--accent-pink);
+    position: relative;
+    background-color: var(--white);
+    padding: 0.5rem 0.5rem 0;
+    box-shadow: 0 1px 2px rgba(62, 39, 35, 0.12), 3px 6px 12px rgba(62, 39, 35, 0.1);
+    transform: rotate(-1deg);
+    transition: transform 0.4s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+.swatch:nth-child(even) { transform: rotate(0.8deg); }
+.swatch:nth-child(3) { --hue: var(--accent-sage); }
+.swatch:hover { transform: rotate(0deg) translateY(-4px); }
+.swatch-chip { height: 110px; border: 1px solid rgba(62, 39, 35, 0.08); }
 .swatch-cream { background-color: #EEEBE7; }
 .swatch-blush { background-color: #F4C9D6; }
 .swatch-espresso { background-color: #3E2723; }
 .swatch-sage { background-color: #A8B89A; }
-.swatch-meta { padding: 0.7rem 0.85rem; font-size: 0.75rem; }
-.swatch-meta strong { display: block; font-size: 0.85rem; }
-.swatch-meta code { color: var(--text-muted); font-size: 0.72rem; }
+.swatch-meta { padding: 0.7rem 0.35rem 0.8rem; font-size: 0.75rem; }
+.swatch-meta strong { display: block; font-family: var(--font-display); font-style: italic; font-size: 1.05rem; }
+.swatch-meta code { color: var(--text-muted); font-size: 0.72rem; letter-spacing: 0.04em; }
 
-.type-specimen { border-left: 4px solid var(--accent-pink); padding-left: 1.2rem; margin: 1.2rem 0; }
-.type-specimen .sample-display { font-family: var(--font-display); font-size: 2rem; line-height: 1.15; }
-.type-specimen .sample-body { font-family: var(--font-body); font-size: 1rem; }
+.type-specimen {
+    position: relative;
+    border-left: 4px solid var(--accent-pink);
+    padding: 0.4rem 0 0.4rem 1.2rem;
+    margin: 1.4rem 0;
+}
+.type-specimen::after {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 4.5rem;
+    line-height: 1;
+    color: color-mix(in srgb, var(--accent-pink-dark) 35%, transparent);
+    pointer-events: none;
+}
+.type-specimen:first-of-type::after { content: 'Aa'; font-family: var(--font-display); font-style: italic; }
+.type-specimen:last-of-type::after { content: 'Aa'; font-family: var(--font-body); }
+.type-specimen .sample-display { font-family: var(--font-display); font-size: 2.2rem; line-height: 1.15; }
+.type-specimen .sample-body { font-family: var(--font-body); font-size: 1rem; max-width: 52ch; }
 .type-specimen .type-name { font-size: 0.66rem; letter-spacing: 0.18em; text-transform: uppercase;
     color: var(--text-muted); font-weight: 600; margin-bottom: 0.4rem; }
 
-.adjectives { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.adjectives { display: flex; flex-wrap: wrap; gap: 0.7rem; }
 .adjectives span {
-    font-family: var(--font-display); font-size: 1.05rem; font-style: italic;
-    border: 1px solid var(--accent-pink-dark); padding: 0.4rem 1rem;
+    font-family: var(--font-display); font-size: 1.1rem; font-style: italic;
+    background-color: var(--white);
+    border: 1px dashed var(--accent-pink-dark); padding: 0.45rem 1.1rem;
 }
+.adjectives span:nth-child(odd) { transform: rotate(-1.2deg); }
+.adjectives span:nth-child(even) { transform: rotate(1deg); }
 
 /* ============================================
    STAR STORIES

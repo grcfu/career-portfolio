@@ -113,6 +113,11 @@ document.addEventListener('DOMContentLoaded', () => {
         el.insertAdjacentHTML('afterbegin', tape + ['tl', 'tr', 'br', 'bl'].map(sprig).join(''));
     });
 
+    // Taped-down prints: paint chips and the home-page polaroid.
+    document.querySelectorAll('.swatch').forEach((el) => {
+        el.insertAdjacentHTML('afterbegin', tape);
+    });
+
     /* --- Reveal sections as they scroll into view --- */
     const revealables = document.querySelectorAll('.reveal');
     if (!revealables.length) return;
