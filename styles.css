@@ -499,18 +499,44 @@ main { padding-bottom: clamp(3rem, 8vw, 5rem); }
 .btn-row { display: flex; gap: 0.8rem; flex-wrap: wrap; margin: 1.2rem 0; }
 
 /* ============================================
-   AI DISCLOSURE BLOCK — required per piece
+   AI DISCLOSURE BLOCK, required per piece
+   Styled as a library checkout card: perforated top edge, sage spine,
+   and a faint ring stamp in the corner.
    ============================================ */
 .ai-disclosure {
-    background-color: var(--bg-secondary);
+    position: relative;
+    background-color: #E9E5DF;
     border-left: 4px solid var(--accent-sage);
-    padding: 1.3rem 1.5rem;
-    margin-top: clamp(2rem, 5vw, 3rem);
+    padding: 1.6rem 1.6rem 1.4rem;
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
     font-size: 0.85rem;
+}
+.ai-disclosure::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background-image: radial-gradient(circle at 5px 5px, var(--bg-primary) 3px, transparent 3.5px);
+    background-size: 14px 10px;
+}
+.ai-disclosure::after {
+    content: '';
+    position: absolute;
+    top: 1rem;
+    right: 1.2rem;
+    width: 3.4rem;
+    height: 3.4rem;
+    border: 2px solid color-mix(in srgb, var(--accent-sage) 55%, transparent);
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 4px #E9E5DF, inset 0 0 0 5px color-mix(in srgb, var(--accent-sage) 45%, transparent);
+    transform: rotate(-12deg);
+    pointer-events: none;
 }
 .ai-disclosure h3 {
     font-family: var(--font-body); font-size: 0.66rem; letter-spacing: 0.18em;
-    text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 0.7rem;
+    text-transform: uppercase; color: var(--sage-ink); font-weight: 700; margin-bottom: 0.7rem;
 }
 .ai-disclosure p { color: var(--text-secondary); }
 .ai-disclosure a { color: var(--text-primary); font-weight: 600; }
@@ -520,26 +546,62 @@ main { padding-bottom: clamp(3rem, 8vw, 5rem); }
 
 /* ============================================
    POINT TABLE
+   A specimen ledger: dotted leaders between the element and its points,
+   and the total circled by hand.
    ============================================ */
 .lede-tight { margin-bottom: 1.2rem; }
-.point-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; background-color: var(--white); }
+.table-scroll { overflow-x: auto; padding: 0.5rem 0.6rem 1rem 0; }
+.point-table {
+    width: 100%; border-collapse: collapse; font-size: 0.88rem;
+    background-image: var(--paper);
+    border: 1px solid rgba(62, 39, 35, 0.12);
+    box-shadow: 5px 6px 0 rgba(62, 39, 35, 0.05);
+}
 .point-table th, .point-table td {
-    text-align: left; padding: 0.65rem 0.85rem; border-bottom: 1px solid rgba(62, 39, 35, 0.1);
+    text-align: left; padding: 0.7rem 0.95rem;
+    border-bottom: 1px dashed rgba(62, 39, 35, 0.14);
 }
 .point-table th {
     font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--text-muted); font-weight: 700; background-color: var(--bg-secondary);
+    color: var(--text-muted); font-weight: 700;
+    border-bottom: 1px solid rgba(62, 39, 35, 0.2);
 }
-.point-table td.num { text-align: right; font-weight: 600; width: 70px; }
+.point-table td:first-child { font-family: var(--font-display); font-style: italic; font-size: 1rem; }
+.point-table td:nth-child(2) { color: var(--text-muted); font-size: 0.8rem; }
+.point-table td.num { text-align: right; font-weight: 600; width: 90px; }
 .point-table tr.total td { font-weight: 700; border-top: 2px solid var(--text-primary); border-bottom: none; }
-.table-scroll { overflow-x: auto; }
+.point-table tr.total td.num { position: relative; font-size: 1.05rem; }
+.point-table tr.total td.num::after {
+    content: '';
+    position: absolute;
+    right: 0.35rem;
+    top: 50%;
+    width: 3.3rem;
+    height: 2.1rem;
+    transform: translateY(-50%) rotate(-6deg);
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 66 42'%3E%3Cpath d='M8 22C6 10 28 4 44 6C60 8 64 20 58 30C50 40 24 40 12 32C6 28 5 22 9 16' fill='none' stroke='%23E8A6B8' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+    pointer-events: none;
+}
 
 /* ============================================
    FOOTER
+   A sage vine runs along its top edge, the same wobble as the page stems.
    ============================================ */
 .site-footer {
+    position: relative;
     background-color: var(--bg-dark); color: var(--text-light);
-    padding: clamp(2.5rem, 6vw, 3.5rem) 0 2rem;
+    padding: clamp(3rem, 6vw, 4rem) 0 2rem;
+    margin-top: 1.5rem;
+}
+.site-footer::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -22px;
+    height: 30px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 30' preserveAspectRatio='none'%3E%3Cpath d='M0 22C30 12 50 28 80 18S130 8 160 18S210 28 240 16' fill='none' stroke='%23A8B89A' stroke-width='1.4' stroke-linecap='round'/%3E%3Cpath d='M52 22C56 14 64 13 68 17C62 21 57 22 52 22Z' fill='%23A8B89A' fill-opacity='.55'/%3E%3Cpath d='M128 13C134 7 142 8 144 13C138 16 133 15 128 13Z' fill='%23A8B89A' fill-opacity='.55'/%3E%3Cpath d='M196 22C200 15 207 15 210 19C205 22 200 23 196 22Z' fill='%23A8B89A' fill-opacity='.55'/%3E%3Ccircle cx='160' cy='18' r='2.6' fill='%23E8A6B8'/%3E%3C/svg%3E") repeat-x left bottom / 240px 30px;
+    pointer-events: none;
 }
 .footer-grid { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
 .site-footer h4 {
@@ -548,7 +610,7 @@ main { padding-bottom: clamp(3rem, 8vw, 5rem); }
 }
 .site-footer ul { list-style: none; }
 .site-footer li { margin-bottom: 0.35rem; }
-.site-footer a { color: rgba(238, 235, 231, 0.78); text-decoration: none; font-size: 0.82rem; }
+.site-footer a { color: rgba(238, 235, 231, 0.78); text-decoration: none; font-size: 0.82rem; transition: color var(--transition-fast); }
 .site-footer a:hover { color: var(--accent-pink); }
 .footer-bottom {
     margin-top: 2.5rem; padding-top: 1.2rem;
