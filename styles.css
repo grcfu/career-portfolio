@@ -825,6 +825,34 @@ a:focus-visible, button:focus-visible, .hub-card:focus-visible {
 }
 
 /* ============================================
+   RESUME PRINT
+   The image version, mounted like a taped sheet; clicking it opens the PDF.
+   ============================================ */
+.resume-print {
+    position: relative;
+    max-width: 780px;
+    margin: 2rem auto 0;
+    padding: 0.6rem;
+    background-color: var(--white);
+    box-shadow: 0 1px 2px rgba(62, 39, 35, 0.12), 6px 12px 28px rgba(62, 39, 35, 0.14);
+    transform: rotate(-0.4deg);
+}
+.resume-print::before,
+.resume-print::after {
+    content: '';
+    position: absolute;
+    top: -0.6rem;
+    width: 5rem;
+    height: 1.15rem;
+    background-color: color-mix(in srgb, var(--accent-pink) 80%, transparent);
+    border-left: 1px dashed rgba(255, 255, 255, 0.7);
+    border-right: 1px dashed rgba(255, 255, 255, 0.7);
+}
+.resume-print::before { left: 1.5rem; transform: rotate(-4deg); }
+.resume-print::after { right: 1.5rem; transform: rotate(3deg); background-color: color-mix(in srgb, var(--accent-sage) 75%, transparent); }
+.resume-print img { display: block; width: 100%; height: auto; }
+
+/* ============================================
    PAGE STEPS
    Previous / next at the foot of every page, in points-table order, so a
    reader can walk the whole portfolio without going back to the hub.
